@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice</title>
+    <style>
+        /* Gaya CSS untuk invoice */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .download-button {
+            display: block;
+            width: 120px;
+            height: 40px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+            margin: 20px auto;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        
+        .download-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Invoice</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Merek</th>
+            <th>Denda per Hari</th>
+            <th>Jumlah Hari</th>
+            <th>Tanggal Sewa</th>
+            <th>Tanggal Kembali</th>
+            <th>Total Biaya</th>
+            <th>Status</th>
+            <th>Status Mobil</th>
+            <th>Tanggal</th>
+            <th>Nomor Polisi</th>
+            <th>Merk</th>
+        </tr>
+        <tr>
+            <td>{{ data.id }}</td>
+            <td>{{ data.nama }}</td>
+            <td>{{ data.merek }}</td>
+            <td>{{ data.denda_per_hari }}</td>
+            <td>{{ data.jumlah_hari }}</td>
+            <td>{{ data.tgl_sewa }}</td>
+            <td>{{ data.tgl_kembali }}</td>
+            <td>{{ data.total_biaya }}</td>
+            <td>{{ data.status }}</td>
+            <td>{{ data.status_mobil }}</td>
+            <td>{{ data.date }}</td>
+            <td>{{ data.nomorPolisi }}</td>
+            <td>{{ data.merk }}</td>
+        </tr>
+    </table>
+    
+    <a class="download-button" href="{{ url_for('pemesanan_blueprint.invoice', id=data.id) }}">Download</a>
+</body>
+</body>
+</html>

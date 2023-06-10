@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.108.0">
+    <title>Album example · Bootstrap v5.3</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+    <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  </head>
+  <body>
+    <header>
+      <a href="" class="logo"><img src="https://ouch-cdn2.icons8.com/4bImgQ-xmy0Ig3GpJdzRXIDNqambEN1pT9WSgJBFKJU/rs:fit:256:272/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvNTkw/L2M2OWQwOWZmLTBk/NDItNDA2Mi05Y2Yz/LWZiYjk0ZTZhYjYx/MS5wbmc.png" alt="Logo"></a>
+      <div class="bx bx-menu" id="menu-icon"></div>
+      
+      <div class="header-btn">
+       
+        <a href="/login" class="btn btn-sVecondary">Login</a>
+        <a href="/logout" class="btn btn-sVecondary">Logout</a>
+        
+        <a href="/tentang_kami"  class="btn btn-secondary my-2">Tentang Kami</a>
+        <a href="#" id="add-btn" class="btn btn-secondary my-2">Add</a>
+       
+    </div>
+    
+       
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+        var formVisible = false;
+
+        $('#add-btn').click(function(e) {
+            e.preventDefault();
+
+            if (formVisible) {
+                $('.form-container').fadeOut();
+                $('.overlay').fadeOut();
+                formVisible = false;
+            } else {
+                $.ajax({
+                    type: 'GET',
+                    url: '/get-form',
+                    success: function(response) {
+                        $('.form-container').html(response);
+                        $('.form-container').fadeIn();
+                        $('.overlay').fadeIn();
+                        formVisible = true;
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<div class="overlay"></div>
+<div class="form-container"></div>
+<script>
+  $(document).ready(function() {
+      var formVisible = false;
+
+      $('#add-filter').click(function(e) {
+          e.preventDefault();
+
+          if (formVisible) {
+              $('.form-container').fadeOut();
+              $('.overlay').fadeOut();
+              formVisible = false;
+          } else {
+              $.ajax({
+                  type: 'GET',
+                  url: '/get-filter',
+                  success: function(response) {
+                      $('.form-container').html(response);
+                      $('.form-container').fadeIn();
+                      $('.overlay').fadeIn();
+                      formVisible = true;
+                  },
+                  error: function(error) {
+                      console.log(error);
+                  }
+              });
+          }
+      });
+  });
+</script>
+
+
+
+  
+<div class="overlay"></div>
+<div class="form-container"></div>
+    </header>
+    <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+    <a href="/logout" class="btn btn-secondary my-2">logout</a>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">About</h4>
+          <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Contact</h4>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white">Follow on Twitter</a></li>
+            <li><a href="#" class="text-white">Like on Facebook</a></li>
+            <li><a href="#" class="text-white">Email me</a></li>
+            <a href="/logout" class="btn btn-secondary my-2">logout</a>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="py-5 text-center container" style="color: white;">
+    <div class="row py-lg-4">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light font-bold"><span>Rent A Car</span> Bang Brii</h1>
+        <p class="lead text-muted" style="color: white;">Sewa Mobil Hanya Di Kami,cukup dengan 300 ribu perhari udah bisa bikin  temen kamu kagum, ga perlu tendang pintu rumah</p>
+         
+          <div class="img-container">
+          <img id="myImage" src="https://tse1.mm.bing.net/th?id=OIP.qz3hfP7m8R8SQEexSSSQ4gHaEI&pid=Api&P=0&w=300&h=300" alt="">
+        </p>
+      </div>
+      </div>
+    </div>
+  </section>
+  <div class="row">
+    {% for p in mobils %}
+      <div class="col-md-3">
+        <div class="card shadow-lg p-3 mb-5 bg-body rounded d-flex flex-column" style="height: 32rem;">
+          <img src="{{p.photo}}" class="card-img-top" alt="..." style="height: 70%;">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <h5 class="card-title">{{p.merek}}</h5>
+            {% if p.status == 'Tersedia' %}
+            <h5 class=><span class="badge bg-success">{{p.status}}</span></h5>
+          {% else %}
+            <h5 class=><span class="badge bg-success">{{p.status}}</span></h5>
+          {% endif %}
+          <script>
+            function formatNumber(number) {
+              if (number >= 1000000) {
+                return (number / 1000).toLocaleString("id-ID", { minimumFractionDigits: 3 }) + " Juta/hari";
+              } else {
+                return number.toLocaleString("id-ID") + " Ribu/hari";
+              }
+            }
+          </script>
+          
+         
+          
+          
+          <h5 class="card-title" style="font-size: 16px;"><script>document.write(formatNumber({{ p.harga_sewa }}))</script></h5>
+          <h5 class="card-title"style="font-size: 12px;">Denda Keterlambatan <script>document.write(formatNumber({{ p.denda_per_hari}}))</script></h5>
+            
+          <p class="card-title" style="font-size: 12px; color: white;">
+            <span style="background-color:  #1E90FF; padding: 5px 10px; border-radius: 5px;">
+              Nomor Plat: {{p.nomor_plat}}
+            </span>
+            <p class="card-title" style="font-size: 10px; color: black;">Last updated {{p.last_updated}}</p>
+          </p>
+          
+          </div>
+          <div class="card-footer">
+            <input type="hidden" name="tgl_sewa" value="{{tgl_sewa}}" id="">
+            <input type="hidden" name="tgl_kembali" value="{{tgl_kembali}}" id="">
+            <div class="btn-group">
+              <a href="#" class="btn btn-danger list-detail-btn" data-mobil-id="{{p.id}}" style="border-radius: 7px; ">detail</a>
+  
+             
+              <a href="/add_pemesanan/{{p.id}}" class="btn btn-primary" style="border-radius: 7px; " >Pesan</a>
+              <a href="/edit/{{p.id}}/mobil" class="btn btn-secondary"  style="border-radius: 7px;">Edit</a>
+              <a href="#" class="btn btn-info list-booking-btn"  style="border-radius: 7px;" data-mobil-id="{{p.id}}">List Pesanan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+<!-- Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="bookingModalLabel">List Pesanan </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <ul id="displayBookingList" class="list-group">
+                  <!-- List of booking items will be dynamically added here -->
+              </ul>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+    <script>
+
+         $(document).ready(function () {
+          // ...
+      
+          // Mengirim permintaan AJAX saat tombol "List Booking" diklik
+          $('.list-booking-btn').click(function () {
+              var mobilId = $(this).data('mobil-id');
+              loadBookingList(mobilId);
+          });
+      
+          // Mengirim permintaan AJAX saat tombol "Detail" diklik
+          $('.list-detail-btn').click(function () {
+              var mobilId = $(this).data('mobil-id');
+              loadDetailMobil(mobilId);
+          });
+      });
+      
+      function loadBookingList(mobilId) {
+          $.ajax({
+              url: '/get_booking_list',
+              type: 'POST',
+              data: {mobil_id: mobilId},
+              success: function (response) {
+                  var bookingList = response.booking_list;
+                  var bookingListContainer = $('#displayBookingList');
+                  bookingListContainer.empty();
+                  displayBookingList(bookingList);
+                  $('#bookingModal').modal('show');
+              },
+              error: function (xhr, status, error) {
+                  console.error(xhr.responseText);
+              }
+          });
+      }
+      
+      function displayBookingList(bookingList) {
+          var bookingListContainer = $('#displayBookingList');
+          bookingListContainer.empty();
+      
+          // Buat elemen tabel
+          var table = $('<table>').addClass('table');
+      
+          // Buat baris header tabel
+          var tableHeader = $('<thead>').append(
+              $('<tr>').append(
+                  $('<th>').text('Nama'),
+                  $('<th>').text('Merk'),
+                  $('<th>').text('Nomer Plat'),
+                  $('<th>').text('Denda per Hari'),
+                  $('<th>').text('Harga Sewa'),
+                  $('<th>').text('Jumlah Hari'),
+                  $('<th>').text('Tanggal Pinjam'),
+                  $('<th>').text('Tanggal Kembali'),
+                  $('<th>').text('Total Biaya')
+              )
+          );
+          table.append(tableHeader);
+      
+          // Buat baris data untuk setiap pemesanan
+          var tableBody = $('<tbody>');
+          for (var i = 0; i < bookingList.length; i++) {
+              var booking = bookingList[i];
+              var tableRow = $('<tr>').append(
+                  $('<td>').text(booking.nama),
+                  $('<td>').text(booking.merek),
+                  $('<td>').text(booking.nomor_plat),
+                  $('<td>').text(booking.denda_per_hari),
+                  $('<td>').text(booking.harga_sewa),
+                  $('<td>').text(booking.jumlah_hari),
+                  $('<td>').text(booking.tgl_sewa),
+                  $('<td>').text(booking.tgl_kembali),
+                  $('<td>').text(booking.total_biaya)
+              );
+              tableBody.append(tableRow);
+          }
+          table.append(tableBody);
+      
+          // Tambahkan tabel ke dalam modal
+          bookingListContainer.append(table);
+      }
+    </script>        
+    
+    
+      </div>
+    
+   
+      <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="detailModalLabel">Detail Mobil</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div id="displayDetailMobil"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <script>
+        function loadDetailMobil(mobilId) {
+          $.ajax({
+            url: '/get_detail_mobil',
+            type: 'POST',
+            data: { mobil_id: mobilId },
+            success: function (response) {
+              var detailMobilList = response.detail_mobil;
+              var detailMobilContainer = $('#displayDetailMobil');
+              detailMobilContainer.empty();
+              displayDetailMobil(detailMobilList);
+              $('#detailModal').modal('show');
+            },
+            error: function (xhr, status, error) {
+              console.error(xhr.responseText);
+            }
+          });
+        }
+      
+        function displayDetailMobil(detailMobilList) {
+          var detailMobilContainer = $('#displayDetailMobil');
+          detailMobilContainer.empty();
+      
+          // Buat elemen card
+          var cardContainer = $('<div>').addClass('card-container');
+      
+          // Buat card untuk setiap detail mobil
+          for (var i = 0; i < detailMobilList.length; i++) {
+            var detailMobil = detailMobilList[i];
+      
+            var card = $('<div>').addClass('card');
+            var cardBody = $('<div>').addClass('card-body');
+      
+            var title = $('<h5>').addClass('card-title').text(detailMobil.merek);
+            var subtitle = $('<h6>').addClass('card-subtitle mb-2 text-muted').text(detailMobil.nomor_plat);
+      
+            var hargaSewa = $('<p>').addClass('card-text').text('Harga Sewa: ' + detailMobil.harga_sewa);
+            var warna = $('<p>').addClass('card-text').text('Warna: ' + detailMobil.warna);
+      
+            cardBody.append(title, subtitle, hargaSewa, warna);
+            card.append(cardBody);
+            cardContainer.append(card);
+          }
+      
+          // Tambahkan card ke dalam container
+          detailMobilContainer.append(cardContainer);
+        }
+      </script>
+      <script>
+        var imageUrls = [
+          "https://tse1.mm.bing.net/th?id=OIP.qz3hfP7m8R8SQEexSSSQ4gHaEI&pid=Api&P=0&w=300&h=300",
+          "https://tse1.mm.bing.net/th?id=OIP.FcDQdGBeaeOB0k28ILolswHaDe&pid=Api&P=0",
+          "https://tse2.mm.bing.net/th?id=OIP.eET48TQR3Q3LimzHhTWS1gHaD6&pid=Api&P=0"
+      
+          
+          
+        ];
+        
+        var index = 0;
+        var image = document.getElementById("myImage");
+        
+        function changeImage() {
+          index++;
+          if (index >= imageUrls.length) {
+            index = 0;
+          }
+          image.src = imageUrls[index];
+        }
+        
+        setInterval(changeImage, 3000); // ganti gambar setiap 5 detik
+        </script>
+      
+      
+        
+        
+         
+          <style>
+            .modal {
+              background-color: rgba(0, 0, 0, 0.6);
+              display: none;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              justify-content: center;
+              align-items: center;
+            }
+          
+            .modal-content {
+              background-color: #fff;
+              padding: 20px;
+              border-radius: 5px;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+              transition: box-shadow 0.3s ease;
+            }
+          
+            .modal-content:hover {
+              box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            }
+          
+            .modal-header {
+              background-color: #f5f5f5;
+              padding: 10px;
+              border-radius: 5px 5px 0 0;
+            }
+          
+            .modal-footer {
+              background-color: #f5f5f5;
+              padding: 10px;
+              border-radius: 0 0 5px 5px;
+            }
+          
+            .modal-body {
+              padding: 10px 0;
+              overflow-y: auto;
+              max-height: 400px;
+            }
+          
+          
+      
+          h1 span{
+            color: #1E90FF;
+          }
+          section {
+            margin-top: 50px;
+          }
+      
+      section{
+        padding: 50px 100px;
+      }
+      header{
+        position: fixed;
+        width: 100%;
+        top:0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #1E90FF;
+        padding: 7px 100px;
+      
+      }
+      .logo img{
+        width: 80px;
+        animation: animateImage 2s ease-in-out infinite alternate;
+        
+      }
+      
+      
+      .navbar{
+        display: flex;
+      }
+      .navbar li{
+        position: relative;
+      }
+      
+      .navbar a {
+        font-size: 1rem;
+        padding: 10px 20px;
+        color: var(--text-color);
+        font-weight: 500;
+      }
+      
+      .navbar a ::after{
+        content: '';
+        width: 0;
+        height: 3px;
+        background: var(--gradinet);
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        transition: 0,5s;
+      
+      }
+      .navbar a:hover::after{
+        width: 100%;
+      }
+      .header-btn a{
+        padding: 10px 20px;
+        background:   #edede9;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        font-weight: 500;
+        color: #000;
+      }
+      .img-container {
+        text-align: center;
+        
+      }
+       .img-container img {
+        width: 200px;
+        margin: auto;
+        display: block;
+        animation: animateImage 2s ease-in-out infinite alternate;
+      
+        
+        }
+        @keyframes animateImage {
+          0% {
+              transform: translateX(0);
+          }
+          100% {
+              transform: translateX(50px);
+          }
+      }
+          .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+          }
+      
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+      
+          .b-example-divider {
+            height: 3rem;
+            background-color:  ##1E90FF;
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+          }
+      
+          .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+          }
+      
+          .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+          }
+      
+          .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+          }
+      
+          .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+          }
+          h1 {
+            color:  #000;
+            font-family: 'Poppins', sans-serif;
+            
+        }
+          p {
+            color: #0069D9;
+            font-family: 'Poppins', sans-serif;
+        }
+        .container-fluid {
+          background-color: ##1E90FF;
+        }
+        
+        .nav-link {
+          color: #007BFF;
+        }
+        
+        .nav-link:hover {
+          color: #0056b3;
+        }
+        
+        .btn-primary {
+          background-color: #007BFF;
+          border-color: #007BFF;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          border-radius: 10px;
+        }
+        
+        .btn-primary:hover {
+          background-color: #0069D9;
+          border-color: #0062cc;
+        }
+        
+        .card {
+          background-color: #FFFFFF;
+          border: none;
+          border-radius: .25rem;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          margin-bottom: 30px;
+          
+        }
+        
+        .card-header {
+          background-color: #F8F9FA;
+          border-bottom: none;
+        }
+        
+        .card-title {
+          color: black;
+          font-size: 24px;
+          font-weight: 600;
+          
+          font-family: 'Poppins', sans-serif;
+            
+        }
+        
+        .card-text {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 1.5;
+        }
+        .btn {
+          padding: 5px 10px;
+         
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          font-weight: 500;
+          color: #fff;
+        
+          }
+          
+          .jumbotron {
+            background-color: #F8F9FA;
+            padding-top: 48px;
+            padding-bottom: 48px;
+          }
+          
+          .display-4 {
+            font-size: 56px;
+            font-weight: 300;
+          }
+          
+          .lead {
+            font-size: 24px;
+            font-weight: 300;
+          }
+          
+          .footer {
+            background-color: #fff;
+            color: #F8F9FA;
+            padding: 30px 0;
+          }
+          
+          .footer a {
+            color: #F8F9FA;
+          }
+          
+          .footer a:hover {
+            color: #007BFF;
+          }
+          
+          .card img {
+            transition: transform 0.5s;
+            }
+            
+            .card:hover img {
+            transform: scale(1.1);
+            }
+            .card-img-top {
+              transition: transform 0.2s ease-in-out;
+            }
+            
+            .card-img-top:hover {
+              transform: scale(1.05);
+            }
+            .icon {
+              animation: spin 2s infinite linear;
+            }
+            
+            @keyframes spin {
+              from {
+                transform: rotate(0deg);
+              }
+              to {
+                transform: rotate(360deg);
+              }
+            }
+            .lead {
+              font-size: 20px;
+            }
+            .text-muted:hover {
+              color: white;
+            }
+            
+           
+        @media (max-width: 768px) {
+        /* Tambahkan aturan CSS untuk tampilan seluler di sini */
+        header {
+        padding: 7px 20px;
+        }
+        
+        .logo img {
+        width: 60px;
+        }
+        
+        .navbar {
+        flex-direction: column;
+        background-color: #1E90FF;
+        margin-top: 10px;
+        }
+        
+        .navbar li {
+        margin: 5px 0;
+        position: initial;
+        }
+        
+        .navbar a {
+        display: block;
+        padding: 10px 0;
+        text-align: center;
+        color: white;
+        font-weight: 500;
+        }
+        
+        .navbar a::after {
+        display: none;
+        }
+        
+        .header-btn {
+        display: none;
+        }
+        
+        .img-container img {
+        width: 150px;
+        }
+        
+        .card {
+        margin: 15px;
+        }
+        
+        .card-title {
+        font-size: 20px;
+        }
+        
+        section {
+        padding: 20px;
+        }
+        }
+            
+        
+          </style>
+          <style>
+            
+            .overlay {
+              display: none;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0, 0, 0, 0.5);
+              z-index: 9999;
+          }
+        
+          .form-container {
+              display: none;
+              position: fixed;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: 400px; /* Sesuaikan ukuran form sesuai kebutuhan */
+              padding: 20px;
+              background-color: #f1f1f1;
+              border-radius: 5px;
+              z-index: 10000;
+          }
+        
+        
+            .form-container h1 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+        
+            .form-container .form-group {
+                margin-bottom: 10px;
+            }
+        
+            .form-container .form-group label {
+                display: block;
+                font-weight: bold;
+            }
+        
+            .form-container .form-control {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+        
+            .form-container .btn {
+                margin-top: 10px;
+            }
+            
+       
+          
+      </style>
+      
+              </div>
+          </div>

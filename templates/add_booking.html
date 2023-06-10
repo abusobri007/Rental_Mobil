@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add pemesanan</title>
+    <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   
+    
+</head>
+</head>
+<body>
+   
+      
+  <div class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-lg-6">
+            <h1 class="fw-bolder text-center">Pinjam Broo</h1>
+            <form action="/transaksi2/{{id}}/save" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="nama">Nama</label>
+                            <input type="text" name="nama" id="nama" class="form-control" value="{{nama}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="merek">Merek</label>
+                            <input type="text" name="merek" id="merek" class="form-control" value="{{ merek }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="nomor_plat">No Plat</label>
+                            <input type="text" name="nomor_plat" id="nomor_plat" class="form-control" value="{{nomor_plat}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="denda_per_hari">Denda Per Hari</label>
+                            <input type="number" name="denda_per_hari" id="denda_per_hari" class="form-control" value="{{denda_per_hari}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="harga_sewa">Harga Sewa</label>
+                            <input type="number" name="harga_sewa" id="harga_sewa" class="form-control" value="{{harga_sewa}}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="jumlah_hari">Jumlah Hari</label>
+                            <input type="number" name="jumlah_hari" id="jumlah_hari" class="form-control" value="{{jumlah_hari}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="tgl_sewa">Tanggal Sewa</label>
+                            <input type="date" name="tgl_sewa" id="tgl_sewa" class="form-control" value="{{ tgl_sewa.strftime('%Y-%m-%d') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="tgl_kembali">Tanggal Kembali</label>
+                            <input type="date" name="tgl_kembali" id="tgl_kembali" class="form-control" value="{{ tgl_kembali.strftime('%Y-%m-%d') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="dp">DP</label>
+                            <select name="dp" id="dp" class="form-control" onchange="updateDP()">
+                                <option value="">-- Pilih Total DP --</option>
+                                <option value="0">0</option>
+                                <option value="70000">70.000</option>
+                                <option value="100000">100.000</option>
+                                <option value="150000">150.000</option>
+                                <option value="200000">200.000</option>
+                                <option value="250000">250.000</option>
+                                <option value="400000">400.000</option>
+                                <option value="700000">700.000</option>
+                                <option value="1000000">1.000.000</option>
+                                <!-- Tambahkan opsi lain sesuai dengan kebutuhan -->
+                                <option value="2000000">2.000.000</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a href="#" id="cancel-link" class="btn btn-warning">Cancel</a>
+                    <button class="btn btn-primary" onclick="submitNotif()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+               
+                <div class="form-group" style="display:none;">
+                    <label for="" style="color: white;">Total Biaya</label>
+                    <input type="hidden" name="total_biaya" id="total_biaya" class="form-control">
+                </div>
+                <div class="form-group" style="display:none;">
+                  <label for="" style="color: white;">Sisa Harga</label>
+                  <input type="hidden" name="sisa_harga" id="sisa_harga" class="form-control">
+              </div>
+                <div class="form-group" style="display:none;">
+                    <label for="" style="color: white;">Status</label>
+                    <input type="hidden" name="status" id="status" class="form-control">
+                </div>
+                <div class="form-group" style="display:none;">
+                  <label for="" style="color: white;">Status_mobil</label>
+                  <input type="hidden" name="status_mobil" id="status_mobil" class="form-control">
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                <script>
+                    document.getElementById("cancel-link").addEventListener("click", function(event) {
+                        event.preventDefault(); // Mencegah aksi default dari tautan
+                        window.history.back(); // Mengarahkan pengguna kembali ke halaman sebelumnya pada history browser
+                    });
+                </script>
+                
+                
+                </script>
+
+                  
+            
+                
+                
+                
+                
+                
+                
+                
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+    </div>
+    
+    <script src="{{url_for('static', filename='bootstrap.min.js')}}" rel="stylesheet"></script>
+ 
+    
+</style>
+<style>
+.red-date {
+    background-color: red !important;
+    color: white;
+}
+.blue-calendar .ui-datepicker-header {
+    background-color: blue;
+    color: white;
+  }
+  .blue-calendar .ui-state-default {
+    background-color: white;
+  }
+  .red-date .ui-state-default {
+    background-color: red !important;
+    color: white;
+    cursor: default;
+  }     
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+  }
+  
+  .container {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: -200px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-warning {
+    background-color: #ffc107;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+  }
+  
+  .fw-bolder {
+    font-weight: bold;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  h1 {
+    color: #f5f5f5;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding: 10px 63px;
+    background-color: #1E90FF;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+ }
+
+  
+</style>
+{% if pesan %}
+        <p>{{ pesan }}</p>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contoh Header</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+	<header>
+        <a href="" class="logo"><img src="https://ouch-cdn2.icons8.com/4bImgQ-xmy0Ig3GpJdzRXIDNqambEN1pT9WSgJBFKJU/rs:fit:256:272/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvNTkw/L2M2OWQwOWZmLTBk/NDItNDA2Mi05Y2Yz/LWZiYjk0ZTZhYjYx/MS5wbmc.png" alt="Logo"></a>
+		<div class="bx bx-menu" id="menu-icon"></div>
+	
+		<div class="header-btn">
+			
+			<a href="/login" class="btn btn-secondary">Log In</a>
+			<a href="/logout" class="btn btn-secondary">Logout</a>
+			<a href="/tantang_kami" class="btn btn-secondary">Tentang_kami</a>
+		</div>
+	</header>
+    <section class="home" id="home">
+        <div class="text">
+            <h1><span>Welcome </span> to <br> Rent A Car Bang Brii</h1>
+            <div class="img-container">
+            <img id="myImage" class="hide" src="https://tse1.mm.bing.net/th?id=OIP.JvXBK8J3F6O0ll8T0iWcnAHaEa&pid=Api&P=0" alt="">
+        </div>
+            <div class="app-stores">
+                <a href="/detail_mobil" class="btn btn-secondary" >Pesan/Sekarang</a> 
+            </div>
+        </div>
+        
+        <div class="form-container">
+            <form action="/list_mobil" method="post">
+                <div class="input-box">
+                    <span style="color: white;">Tanggal Sewa</span>
+                    <input type="date" name="tgl_sewa" id="tgl_sewa" placeholder=" tanggal sewa" readonly>
+                </div>
+                <div class="input-box">
+                    <span style="color: white;">Tanggal Kembali</span>
+                    <input type="date" name="tgl_kembali" id="tgl_kembali" placeholder="input tanggal kembali" readonly>
+                </div>
+                <input type="submit" name="" id="" value="search" class="btn btn-secondary">
+            </form>
+        </div>
+        
+        
+
+    </section>
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $(document).ready(function() {
+        var currentDate = new Date();
+
+        $("#tgl_sewa").datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate: currentDate, // Menetapkan tanggal minimum yang dapat dipilih
+            onSelect: function(selectedDate) {
+                var tglSewa = new Date(selectedDate);
+
+                // Mengatur tanggal minimum pada datepicker tgl_kembali
+                $("#tgl_kembali").datepicker("option", "minDate", tglSewa);
+            }
+        });
+
+        $("#tgl_kembali").datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate: currentDate, // Menetapkan tanggal minimum yang dapat dipilih
+        });
+    });
+</script>
+
+
+<script>
+    var imageUrls = [
+      "https://tse1.mm.bing.net/th?id=OIP.JvXBK8J3F6O0ll8T0iWcnAHaEa&pid=Api&P=0",
+       src="{{ url_for('static', filename='img/gambar2.png') }}",
+      "https://tse2.mm.bing.net/th?id=OIP.eET48TQR3Q3LimzHhTWS1gHaD6&pid=Api&P=0"
+      
+      
+    ];
+    
+    var index = 0;
+    var image = document.getElementById("myImage");
+    
+    function changeImage() {
+      index++;
+      if (index >= imageUrls.length) {
+        index = 0;
+      }
+      image.src = imageUrls[index];
+    }
+    
+    setInterval(changeImage, 3000); // ganti gambar setiap 5 detik
+    </script>
+    
+
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-padding-top: 2rem;
+        scroll-behavior: smooth;
+        list-style: 0;
+        text-decoration: none;
+        font-family: 'Poppins', sans-serif;
+
+    }
+   
+    .reserved {
+        background-color: red;
+        color: white;
+      }
+
+    :root {
+        --main-color: #00BFFF;
+        --second-color: #ffac38;
+        --text-color: #444;
+        --gradient: linear-gradient(var(--main-color), var(--second-color));
+      }
+      
+      html::-webkit-scrollbar {
+        width: 0.9rem;
+      }
+      
+      html::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+      
+      html::-webkit-scrollbar-thumb {
+        background-color: var(--main-color);
+        border-radius: 4rem;
+      }
+      
+
+section{
+    padding: 50px 100px;
+}
+
+
+header{
+    position: fixed;
+    width: 100%;
+    top:0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1E90FF;
+    padding: 7px 100px;
+  
+  }
+.logo img{
+    width: 80px;
+}
+.navbar{
+    display: flex;
+}
+.navbar li{
+    position: relative;
+}
+
+.navbar a {
+    font-size: 1rem;
+    padding: 10px 20px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.navbar a ::after{
+    content: '';
+    width: 0;
+    height: 3px;
+    background: var(--gradinet);
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    transition: 0,5s;
+
+}
+.navbar a:hover::after{
+    width: 100%;
+}
+#menu-icon{
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10001;
+    display: none;
+}
+.header-btn a{
+    padding: 10px 20px;
+    background: #edede9;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    font-weight: 500;
+    color: black;
+}
+.header-btn1 a{
+   
+    background: green;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    font-weight: 500;
+    color: #fff;
+    width: 50px;
+    margin-right: 1rem;
+    cursor: pointer;
+    float: right;
+    margin-left: 10px;
+}
+.home{
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    background: url();
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: cover;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.text h1{
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+}
+
+.text span{
+    color: #1E90FF;
+}
+img {
+    float: right;
+    margin-left: 10px;
+    animation: animateImage 2s ease-in-out infinite alternate;
+
+ }
+ .img-container {
+    float: right;
+    margin-left: 700px;
+    margin-bottom: 50px;
+    margin-right: 70px;
+    animation: animateImage 2s ease-in-out infinite alternate;
+    opacity: 1;
+    transition: opacity 0.10s ease-in-out;
+  }
+
+  .img-container img.hide {
+    opacity: 2;
+  
+    
+
+  
+  }
+  @keyframes animateImage {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(50px);
+    }
+}
+.app-stores{
+    display: flex;
+
+}
+.app-stores img{
+    width: 50px;
+    margin-right: 1rem;
+    cursor: pointer;
+    float: right;
+    margin-left: 10px;
+}
+
+.app-stores a {
+    padding: 10px 20px;
+    background: #edede9;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    font-weight: 50px;
+    color: black;
+    display: inline-block;
+    width: fit-content;
+    
+  }
+  
+  .app-stores .btn {
+    margin-left: 70px;
+    width: fit-content;
+  
+  }
+.form-container form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    position: absolute;
+    bottom: 4rem;
+    left: 100px;
+    background:#1E90FF;
+    padding: 20px;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.input-box{
+    flex: 1 1 7rem;
+    display: flex;
+    flex-direction: column;
+}
+.input-box span{
+    font-weight: 500;
+
+}
+.input-box input{
+    padding: 7px;
+    outline: none;
+    border: none;
+    background: #edede9;
+    color:black;
+    border-radius: 0.9rem;
+    font-size: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.form-container form .btn{
+    flex: 1 1 7rem;
+    padding: 10px 34px;
+    border: none;
+    border-radius: 0.5rem;
+    background: #edede9;
+    font-size: 1rem;
+    font-weight: 500;
+     color: black;
+    
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+</style>
