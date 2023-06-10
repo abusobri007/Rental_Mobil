@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Mobil</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+    <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+</head>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .card {
+      margin-top: 50px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1E90FF;
+      border-bottom: 1px solid #dee2e6;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      padding: 10px 20px;
+    }
+
+    .card-title {
+      margin-bottom: 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-img {
+      height: 100%;
+      transition: all 0.3s ease;
+      border-radius: 10px;
+    }
+
+    .card-img:hover {
+      transform: scale(1.1);
+    }
+
+    .btn {
+      transition: all 0.3s ease;
+      border-radius: 5px;
+    }
+
+    .btn:hover {
+      box-shadow: 0px 0px 5px #888888;
+    }
+
+    .btn-primary {
+      background-color: #1E90FF;
+      border-color #1E90FF;
+    }
+
+    .btn-primary:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+
+    .table-header {
+      background-color:#1E90FF;
+      color: #fff;
+      border-radius: 10px 10px 0 0;  
+    }
+
+    .table-header a {
+      margin-right: 10px;
+    }
+
+    .table {
+      margin-top: 20px;
+    }
+
+    
+     
+  </style>
+
+</head>
+<body>
+
+  <header>
+		<a href="" class="logo"><img src="https://tse2.mm.bing.net/th?id=OIP._mk8pXCWutjUJWQOAUHM7AAAAA&pid=Api&P=0" alt="Logo"></a>
+		<div class="bx bx-menu" id="menu-icon"></div>
+		<ul class="navbar">
+			<a href="#" id="cancel-link" >kembali</a>
+			<li><a href="#">Home</a></li>
+			<li><a href="/detail_mobil">Daftar Mobil</a></li>
+			<li><a href="#">About</a></li>
+		</ul>
+		<div class="header-btn">
+			<a href="#" class="btn btn-secondary">Sign Up</a>
+			<a href="/login" class="btn btn-secondary">Log In</a>
+			<a href="/add{{id}}" class="btn btn-secondary">ADD</a>
+		</div>
+	</header>
+    <div class="card-body">
+      {% for l in dm %}
+      <div class="card mb-3">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img id="myImage" class="hide" src="https://tse1.mm.bing.net/th?id=OIP.JvXBK8J3F6O0ll8T0iWcnAHaEa&pid=Api&P=0" alt="">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h5 class="card-text">Merek: {{l.merek}}</h5>
+              <p class="card-text">NO Plat: {{l.nomor_plat}}</p>
+              <p class="card-text">Warna: {{l.warna}}</p>
+              <p class="card-text">Harga Sewa: {{l.harga_sewa}}</p><p>/hari</P>
+                  <div class="mt-3">
+                    <a href="/mobil/{{id}}/detail/{{l.id}}/delete" class="btn btn-danger mr-2">
+                      <i class="fas fa-trash"></i> 
+                    </a>
+                    <a href="/mobil/{{id}}/detail/{{l.id}}/edit" class="btn btn-primary">
+                      <i class="fas fa-edit"></i> 
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        
+        <script>
+          var imageUrls = [
+            "https://tse1.mm.bing.net/th?id=OIP.JvXBK8J3F6O0ll8T0iWcnAHaEa&pid=Api&P=0",
+            "https://tse1.mm.bing.net/th?id=OIP.FcDQdGBeaeOB0k28ILolswHaDe&pid=Api&P=0",
+            "https://tse2.mm.bing.net/th?id=OIP.eET48TQR3Q3LimzHhTWS1gHaD6&pid=Api&P=0"
+            
+            
+          ];
+          
+          var index = 0;
+          var image = document.getElementById("myImage");
+          
+          function changeImage() {
+            index++;
+            if (index >= imageUrls.length) {
+              index = 0;
+            }
+            image.src = imageUrls[index];
+          }
+          
+          setInterval(changeImage, 3000); // ganti gambar setiap 5 detik
+          </script>
+          
+        </div>
+      </div>
+      
+    <style>
+    .table-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px;
+    }
+    
+    .table-header a {
+      margin-right: 10px;
+    }
+    .table tbody tr:hover {
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
+    table-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px;
+    }
+  
+    .table-header a {
+      margin-right: 10px;
+    }
+  
+    .table tbody tr:hover {
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
+    .table-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px;
+    }
+    
+    .table-header a {
+      margin-right: 10px;
+    }
+    
+    .table tbody tr:hover {
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
+    
+    .card-header, .card-body {
+      border: 1px solid #1E90FF;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+    .btn {
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7); /* Bayangan hitam dengan opasitas 50% */
+    }
+    header{
+      position: fixed;
+      width: 100%;
+      top:0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1E90FF;
+      padding: 0px 70px;
+  
+  }
+  .logo img{
+      width: 80px;
+  }
+  .navbar{
+      display: flex;
+  }
+  .navbar li{
+      position: relative;
+      color: #fFf;
+  }
+  
+  .navbar a {
+      font-size: 1rem;
+      padding: 10px 20px;
+      color: var(--text-color);
+      font-weight: 500;
+      color: #fFf;
+  }
+  
+  .navbar a ::after{
+      content: '';
+      width: 0;
+      height: 3px;
+      background: var(--gradinet);
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      transition: 0,5s;
+  
+  }
+  .navbar a:hover::after{
+      width: 100%;
+  }
+  #menu-icon{
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 10001;
+      display: none;
+  }
+  .header-btn a{
+      padding: 10px 20px;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      font-weight: 500;
+      color: #000;
+  }
+  img {
+    float: right;
+    margin-left: 10px;
+    animation: animateImage 4s ease-in-out infinite alternate;
+    animation: animateImage 4s ease-in-out infinite alternate;
+    opacity: 1;
+    transition: opacity 0.10s ease-in-out;
+  }
+  @keyframes animateImage {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(50px);
+    }
+}
+    </style>
+    <script>
+      document.getElementById("cancel-link").addEventListener("click", function(event) {
+          event.preventDefault(); // Mencegah aksi default dari tautan
+          window.history.back(); // Mengarahkan pengguna kembali ke halaman sebelumnya pada history browser
+      });
+  </script>

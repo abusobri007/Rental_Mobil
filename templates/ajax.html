@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  
+    <title>Document</title>
+</head>
+<body>
+
+  <div class="d-flex align-items-start">
+    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <button class="nav-link" id="v-pills-table1-tab" data-bs-toggle="pill" data-bs-target="#v-pills-table1" type="button" role="tab" aria-controls="v-pills-table1" aria-selected="false">Table Pemesanan</button>
+      <button class="nav-link" id="v-pills-table2-tab" data-bs-toggle="pill" data-bs-target="#v-pills-table2" type="button" role="tab" aria-controls="v-pills-table2" aria-selected="false">DI Pinjam</button>
+      <button class="nav-link" id="v-pills-table3-tab" data-bs-toggle="pill" data-bs-target="#v-pills-table3" type="button" role="tab" aria-controls="v-pills-table3" aria-selected="false">Pengembalian</button>
+    </div>
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade" id="v-pills-table1" role="tabpanel" aria-labelledby="v-pills-table1-tab" tabindex="0">
+        <table class="table-info">
+              <thead class="table">
+                <div class="text-end"   > 
+                  {% if pemesanan.prev_num is not none %}
+                    <a href="{{ url_for('detail_mobil_blueprint.index', page=pemesanan.prev_num) }}" class="btn btn-outline-dark {% if pemesanan.page == 1 %}disabled{% endif %}">
+                      &laquo;
+                    </a>
+                  {% endif %}
+                  
+                  {% for page_num in pemesanan.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                      {% if pemesanan.page == page_num %}
+                        <a href="{{ url_for('detail_mobil_blueprint.index', page=page_num) }}" class="btn btn-dark">{{ page_num }}</a>
+                      {% else %}
+                        <a href="{{ url_for('detail_mobil_blueprint.index', page=page_num) }}" class="btn btn-outline-dark">{{ page_num }}</a>
+                      {% endif %}
+                    {% else %}
+                      . . .
+                    {% endif %}
+                  {% endfor %}
+                  
+                  {% if pemesanan.next_num is not none %}
+                    <a href="{{ url_for('detail_mobil_blueprint.index', page=pemesanan.next_num) }}" class="btn btn-dark">
+                      &raquo;
+                    </a>
+                  {% endif %}
+                </div>
+                
+                <p class="text-end mt-3">
+                  Showing page {{ pemesanan.page }} of {{ pemesanan.pages }}
+                </p>
+              </thead>
+              <tr>
+             
+            
+                    <th >No</th>
+                    <th scope="col" style="min-width: 100px">Nama</th>
+                    <th scope="col" style="min-width: 100px">Merek</th>
+                    <th scope="col" style="min-width: 100px">No Plat</th>
+                    <th scope="col" style="min-width: 100px">Denda Per Hari</th>
+                    <th scope="col" style="min-width: 100px">DP</th>
+                    <th scope="col" style="min-width: 100px">Harga Sewa</th>
+                    <th scope="col" style="min-width: 50px">Jumlah Hari</th>
+                    <th scope="col" style="min-width: 100px">Tanggal Sewa</th>
+                    <th scope="col" style="min-width: 100px">Tanggal Kembali</th>
+                    <th scope="col" style="min-width: 100px">Total Harga</th>
+                    
+                   
+                    <th scope="col" style="min-width: 270px">action</th>
+                   
+                  </tr>
+                </thead>
+              
+                <tbody>
+                  {% for l in pemesanan.items %}
+                  <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{l.nama}}</td>
+                    <td>{{l.merek}}</td>
+                    <td>{{l.nomor_plat}}</td>
+                    <td>{{l.denda_per_hari}}</td>
+                    <td>{{l.dp}}</td>
+                    <td>{{l.harga_sewa}}</td>
+                    <td>{{l.jumlah_hari}}</td>
+                    <td>{{l.tgl_sewa}}</td>
+                    <td>{{l.tgl_kembali}}</td>
+                    <td>{{l.total_biaya}}</td>
+                  
+                   
+                    
+                    
+                    <td>
+                        <a href="/pemesanan/{{l.id}}/delete" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> 
+                      <a href="/mobil/{{id}}/pemesanan/{{l.id}}/edit" class="btn btn-secondary">
+                        <i class="fas fa-edit"></i> 
+                      </a>
+                      <a href="/invoice/{{l.id}}" class="btn btn-primary print-link">
+                        <i class="fas fa-print"></i>
+                      </a>
+                      
+                      <a href="/pemesanan/{{l.id}}/delete" class="btn btn-warning return-link" style="color:#fff">
+                        <i class="fas fa-times-circle"></i>
+                      </a>
+                      
+                      
+                      <a href="/add_mobildipinjam/{{l.id}}" class="btn btn-info return-link" style="color:#fff" >
+                        <i class="fas fa-key"></i>
+                      </a>
+                      
+                      
+                     
+                      
+                      
+                      
+                    </td>
+                  </tr>
+                  {% endfor %}
+                
+                 
+                  
+                </head>
+                
+                
+            </table>
+            
+            </tbody>       
+            
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-success  mt-2">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+              
+          </div>
+          <div class="tab-pane fade" id="v-pills-table2" role="tabpanel" aria-labelledby="v-pills-table2-tab" tabindex="0">
+            <table class="table-info">
+                <thead class="table">
+                  <div class="text-end"   > 
+                    {% if mdp.prev_num is not none %}
+                      <a href="{{ url_for('detail_mobil_blueprint.index', page=mdp.prev_num) }}" class="btn btn-outline-dark {% if mdp.page == 1 %}disabled{% endif %}">
+                        &laquo;
+                      </a>
+                    {% endif %}
+                    
+                    {% for page_num in mdp.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                      {% if page_num %}
+                        {% if mdp.page == page_num %}
+                          <a href="{{ url_for('detail_mobil_blueprint.index', page=page_num) }}" class="btn btn-dark">{{ page_num }}</a>
+                        {% else %}
+                          <a href="{{ url_for('detail_mobil_blueprint.index', page=page_num) }}" class="btn btn-outline-dark">{{ page_num }}</a>
+                        {% endif %}
+                      {% else %}
+                        . . .
+                      {% endif %}
+                    {% endfor %}
+                    
+                    {% if mdp.next_num is not none %}
+                      <a href="{{ url_for('detail_mobil_blueprint.index', page=mdp.next_num) }}" class="btn btn-dark">
+                        &raquo;
+                      </a>
+                    {% endif %}
+                  </div>
+                  
+                  <p class="text-end mt-3">
+                    Showing page {{ mdp.page }} of {{ mdp.pages }}
+                  </p>
+                </thead>
+                  <tr>
+                    
+                    <th >No</th>
+                    <th scope="col" style="min-width: 100px">Nama</th>
+                    <th scope="col" style="min-width: 100px">Merek</th>
+                    <th scope="col" style="min-width: 100px">No Plat</th>
+                    <th scope="col" style="min-width: 100px">Denda Per Hari</th>
+                    <th scope="col" style="min-width: 100px">DP</th>
+                    <th scope="col" style="min-width: 100px">Harga Sewa</th>
+                    <th scope="col" style="min-width: 50px">Jumlah Hari</th>
+                    <th scope="col" style="min-width: 100px">Tanggal Sewa</th>
+                    <th scope="col" style="min-width: 100px">Tanggal Kembali</th>
+                    <th scope="col" style="min-width: 100px">Total Harga</th>
+                    
+                   
+                    <th scope="col" style="min-width: 50px">action</th>
+                   
+                  </tr>
+                </thead>
+              
+                <tbody>
+                  {% for l in mdp %}
+                  <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{l.nama}}</td>
+                    <td>{{l.merek}}</td>
+                    <td>{{l.nomor_plat}}</td>
+                    <td>{{l.denda_per_hari}}</td>
+                    <td>{{l.dp}}</td>
+                    <td>{{l.harga_sewa}}</td>
+                    <td>{{l.jumlah_hari}}</td>
+                    <td>{{l.tgl_sewa}}</td>
+                    <td>{{l.tgl_kembali}}</td>
+                    <td>{{l.total_biaya}}</td>
+                    <td>
+                      <a href="/add_transaksi/{{l.id}}" class="btn btn-success return-link" style="color:#fff" >
+                        <i class="fas fa-check-circle"></i>
+                      </a>
+                      
+                    </td>
+                    
+                    
+                   
+                  </tr>
+                  {% endfor %}
+                
+                 
+                  
+                </head>
+                
+            </table>
+            
+            </tbody>       
+            
+            
+          </div>
+        <div class="tab-pane fade" id="v-pills-table3" role="tabpanel" aria-labelledby="v-pills-table3-tab" tabindex="0">
+            <table class="table-info">
+                <thead class="table">
+                 
+                    <tr>
+                      <th scope="col" style="min-width: 50px">No</th>
+                      <th scope="col" style="min-width: 130px">Nama</th>
+                      <th scope="col" style="min-width: 100px">Tanggal sewa</th>
+                      <th scope="col" style="min-width: 100px">Tanggal Kembali</th>
+                      <th scope="col" style="min-width: 100px">Jumlah Hari</th>
+                      <th scope="col" style="min-width: 100px">Metode Pembayaran</th>
+                      <th scope="col" style="min-width: 100px">DP</th>
+                      <th scope="col" style="min-width: 100px">Harga Sewa</th>
+                      <th scope="col" style="min-width: 100px">Denda Per Hari</th>
+                      <th scope="col" style="min-width: 100px">Denda</th>
+                      <th scope="col" style="min-width: 100px">Sisa Harga</th>
+                  
+                      <th scope="col" style="min-width: 130px">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for l in lt %}
+                    <tr>
+                      <td>{{loop.index}}</td>
+                      <td>{{l.nama}}</td>
+                      <td>{{l.tgl_sewa}}</td>
+                      <td>{{l.tgl_kembali}}</td>
+                      <td>{{l.jumlah_hari}}</td>
+                      <td>{{l.metode_pembayaran}}</td>
+                      <td>{{l.dp}}</td>
+                      <td>{{l.harga_sewa}}</td>
+                      <td>{{l.denda_per_hari}}</td>
+                      <td>{{l.denda}}</td>
+                      <td>{{l.total_biaya}}</td>
+                     
+                      <td>
+                        <a href="/transaksi/{{l.id}}/delete" class="btn btn-danger">
+                          <i class="fas fa-trash"></i> 
+                        </a>
+                        <a href="/mobil/{{id}}/transaksi/{{l.id}}/edit" class="btn btn-secondary">
+                          <i class="fas fa-edit"></i> 
+                        </a> 
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
+        
+        
+<script>
+  const triggerTabList = document.querySelectorAll('#myTab button')
+  triggerTabList.forEach(triggerEl => {
+    const tabTrigger = new bootstrap.Tab(triggerEl)
+  
+    triggerEl.addEventListener('click', event => {
+      event.preventDefault()
+      tabTrigger.show()
+  
+      // Tambahan kode untuk mengarahkan ke tab pemesanan setelah klik
+      const targetTab = triggerEl.getAttribute('data-bs-target')
+      if (targetTab === '#profile') {
+        window.location.href = '/pemesanan#v-pills-table1'
+      }
+    })
+  })
+  
+
+</script>
+
+<style>
+  
+    .nav-link {
+      background-color: green; /* Mengubah warna latar belakang menjadi hijau */
+      color: #1E90FF; /* Mengubah warna teks menjadi putih */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    
+    
+    
+  
+  header{
+    position: fixed;
+    width: 100%;
+    top:0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1E90FF;
+    padding: 7px 100px;
+    left: 0;
+    z-index: 2;
+}
+.logo img{
+    width: 80px;
+}
+    table {
+     
+overflow-x: auto;
+  overflow-y: auto;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  margin-top: 200px;
+  margin-left: -100px;
+    }
+    table td {
+      width: 100px;
+      height: 50px;
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid white;
+      transition: transform 0.3s ease-in-out;
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+      border-collapse: collapse;
+      max-width: 800px; /* Atur lebar maksimum tabel */
+      margin-bottom: 20px;
+    }
+    .btn {
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7); /* Bayangan hitam dengan opasitas 50% */
+      margin-right: 5px;
+    }
+    
+    table td:hover {
+      transform: translateX(10px);
+    }
+
+    th,
+    td {
+     
+      overflow-x: auto;
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      font-size: 13px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color:  #1E90FF;
+      ;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      border-bottom: 2px solid #fff;
+    }
+
+    td {
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    /* Style untuk deskripsi */
+    td.description {
+      max-width: 500px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-all;
+    }
+
+    /* Style untuk hover pada baris */
+    tr:hover {
+      background-color: #fff;
+      animation: colorchange 1s infinite alternate;
+    }
+
+    /* Style untuk pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .page-item.active .page-link {
+      background-color: #fff;
+      border-color: #fff;
+    }
+
+    .page-link {
+      color: #fff;
+      border: 1px solid #ddd;
+    }
+
+    /* tambahan styling */
+    .table-header {
+      background-color: #1E90FF;
+      ;
+      color: #fff;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .table-header .btn {
+      border: none;
+      font-size: 18px;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+    .logo img{
+      width: 150px;
+      animation: animateImage 2s ease-in-out infinite alternate;
+    }
+    img {
+      float: right;
+      margin-left: 10px;
+      animation: animateImage 2s ease-in-out infinite alternate;
+    }  
+    .table-header .btn:hover {
+      color: #fff;
+      text-decoration: none;
+      opacity: 0.7;
+    }
+    .table-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px;
+    }
+    
+    .table-header a {
+      margin-right: 5px;
+    }
+    .table tbody tr:hover {
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
+    table-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px;
+    }
+  
+    .table-header a {
+      margin-right: 10px;
+    }
+    
+    .table tbody tr:hover {
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
+    .alert-success {
+      background-color: #28a745;
+      color: #fff;
+    }
+    
+    /* Tambahkan CSS ini */
+@media screen and (max-width: 767px) {
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  thead {
+    display: none;
+  }
+  tbody {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+  tr {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+  td {
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+  }
+  td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-align: left;
+    width: 50%;
+  }
+  td:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+@media print {
+  .print-link {
+    display: none;
+  }
+  
+  .print-link i {
+    display: block;
+    font-size: 48px; /* ubah sesuai ukuran ikon Anda */
+    margin: 0 auto;
+  }
+}
+
+@keyframes animateImage {
+  0% {
+      transform: translateX(0);
+  }
+  100% {
+      transform: translateX(50px);
+  }
+}
+
+  </style>     

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.108.0">
+    <title>Tentang Kami</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+    <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+  </head>
+  <body>
+    <header>
+      <a href="" class="logo"><img src="https://tse2.mm.bing.net/th?id=OIP._mk8pXCWutjUJWQOAUHM7AAAAA&pid=Api&P=0" alt="Logo"></a>
+      <div class="bx bx-menu" id="menu-icon"></div>
+      <ul class="navbar">
+        <a href="/sewa" style="color:#fff">Home</a>
+        <a href="#" style="color:#fff">Tentang Kami</a>
+        <a href="/detail_mobil" style="color:#fff">Daftar Mobil</a>
+    </header>
+        <body>
+            <h1>Tentang Kami</h1>
+            <p>Kami adalah perusahaan rental mobil yang bergerak di bidang transportasi sejak tahun 2000. Kami menyediakan berbagai jenis mobil dengan harga terjangkau dan pelayanan yang memuaskan.</p>
+            <h2>Visi dan Misi</h2>
+            <h3>Visi</h3>
+            <p>Menjadi perusahaan rental mobil terbaik dan terpercaya di Indonesia.</p>
+            <h3>Misi</h3>
+            <ul>
+              <li>Memberikan pelayanan terbaik kepada pelanggan.</li>
+              <li>Menyediakan mobil berkualitas dengan harga terjangkau.</li>
+              <li>Menjaga kepuasan pelanggan dengan mengutamakan kualitas dan keamanan.</li>
+            </ul>
+            <h2>Tim Kami</h2>
+            <h3>CEO - John Doe</h3>
+            <p>John Doe memiliki pengalaman lebih dari 10 tahun di bidang transportasi dan pernah menjabat sebagai manajer di perusahaan rental mobil terkemuka sebelum mendirikan perusahaan ini.</p>
+            <h3>Marketing Manager - Jane Smith</h3>
+            <p>Jane Smith memiliki pengalaman lebih dari 5 tahun di bidang pemasaran dan pernah bekerja di beberapa perusahaan ternama sebelum bergabung dengan tim kami.</p>
+            <h3>Customer Service - David Lee</h3>
+            <p>David Lee adalah seorang profesional di bidang pelayanan pelanggan dan memiliki pengalaman lebih dari 7 tahun di industri perhotelan sebelum bergabung dengan tim kami.</p>
+          </body>
+        </html>
+
+        <style>
+  
+    
+                h1 span{
+                  color: #1E90FF;
+                }
+                section {
+                  margin-top: 50px;
+                }
+            
+            section{
+              padding: 50px 100px;
+            }
+            header{
+              position: fixed;
+              width: 100%;
+              top:0;
+              right: 0;
+              z-index: 1000;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              background: #1E90FF;
+              padding: 7px 100px;
+            
+            }
+            .logo img{
+              width: 80px;
+              animation: animateImage 2s ease-in-out infinite alternate;
+              
+            }
+            
+            
+            .navbar{
+              display: flex;
+            }
+            .navbar li{
+              position: relative;
+            }
+            
+            .navbar a {
+              font-size: 1rem;
+              padding: 10px 20px;
+              color: var(--text-color);
+              font-weight: 500;
+            }
+            
+            .navbar a ::after{
+              content: '';
+              width: 0;
+              height: 3px;
+              background: var(--gradinet);
+              position: absolute;
+              bottom: -4px;
+              left: 0;
+              transition: 0,5s;
+            
+            }
+            .navbar a:hover::after{
+              width: 100%;
+            }
+            .header-btn a{
+              padding: 10px 20px;
+              background: #fff;
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+              font-weight: 500;
+              color: #000;
+            }
+            .img-container {
+              text-align: center;
+              
+            }
+             .img-container img {
+              width: 200px;
+              margin: auto;
+              display: block;
+              animation: animateImage 2s ease-in-out infinite alternate;
+            
+              
+              }
+              @keyframes animateImage {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(50px);
+                }
+            }
+                .bd-placeholder-img {
+                  font-size: 1.125rem;
+                  text-anchor: middle;
+                  -webkit-user-select: none;
+                  -moz-user-select: none;
+                  user-select: none;
+                }
+            
+                @media (min-width: 768px) {
+                  .bd-placeholder-img-lg {
+                    font-size: 3.5rem;
+                  }
+                }
+            
+                .b-example-divider {
+                  height: 3rem;
+                  background-color:  ##1E90FF;
+                  border: solid rgba(0, 0, 0, .15);
+                  border-width: 1px 0;
+                  box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+                }
+            
+                .b-example-vr {
+                  flex-shrink: 0;
+                  width: 1.5rem;
+                  height: 100vh;
+                }
+            
+                .bi {
+                  vertical-align: -.125em;
+                  fill: currentColor;
+                }
+            
+                .nav-scroller {
+                  position: relative;
+                  z-index: 2;
+                  height: 2.75rem;
+                  overflow-y: hidden;
+                }
+            
+                .nav-scroller .nav {
+                  display: flex;
+                  flex-wrap: nowrap;
+                  padding-bottom: 1rem;
+                  margin-top: -1px;
+                  overflow-x: auto;
+                  text-align: center;
+                  white-space: nowrap;
+                  -webkit-overflow-scrolling: touch;
+                }
+                body {
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 16px;
+                    color: #333;
+                    line-height: 1.5;
+                    margin: 0;
+                    padding: 0;
+                  }
+                  
+                  h1, h2, h3 {
+                    font-family: 'Montserrat', sans-serif;
+                    font-weight: bold;
+                    margin: 20px 0 10px 0;
+                  }
+                  
+                  h1 {
+                    font-size: 32px;
+                  }
+                  
+                  h2 {
+                    font-size: 24px;
+                  }
+                  
+                  h3 {
+                    font-size: 20px;
+                  }
+                  
+                  p {
+                    margin: 10px 0;
+                  }
+                  
+                  ul {
+                    margin: 10px 0;
+                    padding: 0;
+                    list-style: none;
+                  }
+                  
+                  li {
+                    margin-bottom: 5px;
+                  }
+                  
+                  /* Styling for links */
+                  a {
+                    color: #007bff;
+                    text-decoration: none;
+                  }
+                  
+                  a:hover {
+                    text-decoration: underline;
+                  }
+            
+              </style>

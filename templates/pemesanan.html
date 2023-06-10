@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List pemesanan</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+  
+ 
+</head>
+  <body>
+    <button id="tombol">Klik saya!</button>
+    <script>
+      const tombol = document.getElementById('tombol');
+      tombol.addEventListener('click', function() {
+        alert('jangan lupa sholat!');
+      });
+    </script>
+</body>
+<body>
+
+  <style>
+    table {
+      overflow-x: auto;
+      overflow-y: auto;
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 14px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      margin-top: 50px;
+      margin-right: -100px;
+    }
+    
+
+    .dropdown .dropdown-toggle {
+      width: 100%;
+      text-align: left;
+    }
+  
+    .dropdown-menu {
+      min-width: 100%;
+    }
+  
+    .col-3 {
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+    
+    
+    
+    
+    
+    .btn {
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7); /* Bayangan hitam dengan opasitas 50% */
+    }
+    
+    table td:hover {
+      transform: translateX(10px);
+    }
+
+    th,
+    td {
+     
+      overflow-x: auto;
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      font-size: 13px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color:  #1E90FF;
+      ;
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      border-bottom: 2px solid #fff;
+    }
+    td {
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    /* Style untuk deskripsi */
+    td.description {
+      max-width: 500px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-all;
+    }
+
+    /* Style untuk hover pada baris */
+    tr:hover {
+      background-color: #fff;
+      animation: colorchange 1s infinite alternate;
+    }
+
+    /* Style untuk pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .page-item.active .page-link {
+      background-color: #fff;
+      border-color: #fff;
+    }
+
+    .page-link {
+      color: #fff;
+      border: 1px solid #ddd;
+    }
+
+    /* tambahan styling */
+    .table-header {
+      background-color: #1E90FF;
+      ;
+      color: #fff;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .table-header .btn {
+      border: none;
+      font-size: 18px;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .table-header .btn:hover {
+      color: #fff;
+      text-decoration: none;
+      opacity: 0.7;
+    }
+    .table-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px;
+    }
+    
+    .table-header a {
+      margin-right: 5px;
+    }
+    .table tbody tr:hover {
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
+    table-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px;
+    }
+  
+    .table-header a {
+      margin-right: 10px;
+    }
+    
+    .table tbody tr:hover {
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
+    .alert-success {
+      background-color: #28a745;
+      color: #fff;
+    }
+    
+      .pagination-container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+    
+      .pagination-buttons a {
+        margin-right: -700px;
+      }
+    
+      .text-end {
+        text-align: right;
+        margin-right: -600;
+      }
+      
+      .button-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+    
+      .button-row .btn {
+        margin-right: 10px;
+      }
+      .row .col-6 {
+        display: flex;
+        align-items: center;
+      }
+      .btn-col {
+        display: flex;
+        align-items: center;
+      }
+      
+      
+      .row .col-6 .row {
+        display: flex;
+        align-items: center;
+      }
+      
+      .row .col-6 .row .col-3,
+      .row .col-6 .row .col-6 {
+        padding-right: 10px;
+        padding-left: 20px;
+      }
+      
+      .row .col-6 .row .col-6 a {
+        width: 100%;
+      }
+      
+      @media (max-width: 767px) {
+        .row .col-6 .row .col-3,
+        .row .col-6 .row .col-6 {
+          padding-right: 0;
+          padding-left: 0;
+        }
+      }
+      
+    
+    
+    /* Tambahkan CSS ini */
+@media screen and (max-width: 767px) {
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  thead {
+    display: none;
+  }
+  tbody {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+  tr {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+  td {
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+  }
+  td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-align: left;
+    width: 50%;
+  }
+  td:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+@media print {
+  .print-link {
+    display: none;
+  }
+  
+  .print-link i {
+    display: block;
+    font-size: 48px; /* ubah sesuai ukuran ikon Anda */
+    margin: 0 auto;
+  }
+}
+
+
+th[scope="col"] {
+  max-width: 50px; /* Atur lebar maksimum kolom */
+  min-width: 50px; /* Atur lebar minimum kolom */
+  overflow: hidden; /* Sembunyikan konten yang melebihi lebar kolom */
+  text-overflow: ellipsis; /* Tampilkan titik elipsis untuk konten yang terpotong */
+  white-space: nowrap; /* Mencegah pemisahan teks menjadi beberapa baris */
+}
+
+.small-action {
+  padding: 5px 10px; /* Atur ukuran padding sesuai kebutuhan */
+  font-size: 12px; /* Atur ukuran font sesuai kebutuhan */
+}
+/* Styling untuk form pencarian */
+form {
+  display: flex;
+  align-items: center;
+}
+
+/* Styling untuk input pencarian */
+input[name="merek_nama"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+ 
+}
+
+/* Styling untuk tombol pencarian */
+
+
+
+</style>
+
+<style>
+  /* Styling untuk container */
+ 
+  /* Styling untuk input pencarian */
+  .filter-search-container input[name="merek_nama"] {
+    flex: 7;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    
+  }
+
+  /* Styling untuk tombol pencarian */
+  .filter-search-container button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  /* Styling untuk formulir filter tanggal */
+  .filter-search-container form:first-child {
+    margin-right: 8px;
+  }
+
+  
+
+  .filter {
+    margin-top: -3px; /* Sesuaikan jarak ke bawah sesuai kebutuhan */
+  }
+  .search{
+    width: 200px;
+    margin-left: 800px;
+    margin-top: -45px;
+  }
+</style>
+
+
+
+<div class="col-8">
+  Filters:
+  
+  <div class="row">
+    <div class="col-3">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" fdprocessedid="u60adp">
+          Status Mobil
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=1, status=request.args.get('status', ''), status_mobil='semua') }}">
+              Semua
+            </a>
+          </li>
+          
+          </li>
+          <li>
+            <a class="dropdown-item" href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=1, status=request.args.get('status',''), status_mobil='dipinjam') }}">
+              Mobil Dipinjam
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=1, status=request.args.get('status',''), status_mobil='kembali') }}">
+              Kembali
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" fdprocessedid="u60adp">
+          Status Transaksi
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=1, status_mobil=request.args.get('status_mobil', ''), status='semua') }}">
+              Semua
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=1, status_mobil=request.args.get('status_mobil', ''), status='lunas') }}">
+              Lunas
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=1, status_mobil=request.args.get('status_mobil', ''), status='belum lunas') }}">
+              Belum Lunas
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="filter">
+        <form method="GET" action="{{ url_for('pemesanan_blueprint.all_pemesanan', page=mdp.page) }}" class="d-flex">
+          <div class="form-group me-2">
+            <input type="date" id="filter_date" name="filter_date" class="form-control" value="{{ request.args.get('filter_date', '') }}">
+          </div>
+          <!-- Additional form inputs for status_transaksi and status_mobil -->
+          <input type="hidden" name="status_mobil" value="{{ request.args.get('status_mobil', '') }}">
+          <input type="hidden" name="status" value="{{ request.args.get('status', '') }}">
+          <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+        
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    <div class="search">
+    <form action="" class="">
+      <input name="merek_nama" type="text" placeholder="search" value="{{merek_nama}}" required class="form-control me-2" />
+      <button type="submit" class="btn btn-primary">Cari</button>
+    </form>
+  </div>
+<div class="container-fluid px-1">
+  <div class="container-fluid px-1">
+    <table class="table-info">
+      <tr>
+        <td>
+          <a href="/list_pesanan/1" class="btn btn-primary my-2">Tabel Booking</a>
+        </td>
+        <td>
+          <a href="/list_pengembalian/1" class="btn btn-primary my-2">Tabel Mobil Kembali</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+  <table class="table-info">
+    
+
+    <thead>
+      <tr>
+        <th scope="col" style="min-width: 0px">No</th>
+        <th scope="col" style="min-width: 50px">Nama</th>
+        <th scope="col" style="min-width: 100px">Merek</th>
+        <th scope="col" style="min-width: 100px">No Plat</th>
+        <th scope="col" style="min-width: 100px">Denda Per Hari</th>
+        <th scope="col" style="min-width: 100px">Harga Sewa</th>
+        <th scope="col" style="min-width: 100px">Tanggal Sewa</th>
+        <th scope="col" style="min-width: 100px">Tanggal Kembali</th>
+        <th scope="col" style="min-width: 1px">Jumlah Hari</th>
+        <th scope="col" style="min-width: 100px">Total Harga</th>
+        <th scope="col" style="min-width: 100px">DP</th>
+        <th scope="col" style="min-width: 100px">Sisa Harga</th>
+        <th scope="col" style="min-width: 100px">status</th>
+        <th scope="col" style="min-width: 100px">status Mobil</th>
+        <th scope="col" style="min-width: 170px">action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for l in mdp.items %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ l.nama }}</td>
+        <td>{{ l.merek }}</td>
+        <td>{{ l.nomor_plat }}</td>
+        <td>{{ l.denda_per_hari }}</td>
+        <td>{{ l.harga_sewa }}</td>
+        <td>{{ l.tgl_sewa }}</td>
+        <td>{{ l.tgl_kembali }}</td>
+        <td>{{ l.jumlah_hari }}</td>
+        <td>{{ l.total_biaya }}</td>
+        <td>{{ l.dp }}</td>
+        <td>{{ l.sisa_harga }}</td>
+        <td>
+          {% if l.dp >= l.total_biaya %}
+          lunas
+          {% else %}
+          belum lunas
+          {% endif %}
+        </td>
+        <td>{{ l.status_mobil }}</td>
+        
+        <td>
+          <a href="/pemesanan/{{ l.id }}/delete" class="btn btn-danger small-action">
+            <i class="fas fa-trash"></i>
+          </a>
+          <a href="/pemesanan/{{ l.id }}/edit" class="btn btn-secondary small-action">
+            <i class="fas fa-edit"></i>
+          </a>
+          <a href="/invoicekuy/{{ l.id }}" class="btn btn-primary small-action print-link">
+            <i class="fas fa-print"></i>
+          </a>
+          <a href="/add_transaksi/{{ l.id }}" class="btn btn-success small-action return-link" style="color:#fff">
+            <i class="fas fa-check-circle"></i>
+          </a>
+          <p class="small-text" style="font-size: 10px;">{{l.last_updated}}</p>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+<div class="text-end mt-3">
+  
+    {% if mdp.prev_num is not none %}
+    <a href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=mdp.prev_num) }}" class="btn btn-outline-primary {% if mdp.page == 1 %}disabled{% endif %}">
+      &laquo;
+    </a>
+    {% endif %}
+
+    {% for page_num in mdp.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+    {% if mdp.page == page_num %}
+    <a href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=page_num) }}" class="btn btn-primary">{{ page_num }}</a>
+    {% else %}
+    <a href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=page_num) }}" class="btn btn-outline-primary">{{ page_num }}</a>
+    {% endif %}
+    {% else %}
+    . . .
+    {% endif %}
+    {% endfor %}
+
+    {% if mdp.next_num is not none %}
+    <a href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=mdp.next_num) }}" class="btn btn-primary">
+      &raquo;
+    </a>
+    {% endif %}
+  </div>
+
+  <p class="text-end mt-3">
+    Showing page {{ mdp.page }} of {{ mdp.pages }}
+  </p>
+
+</div>
+
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success mt-2">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
+
+<script>
+// JavaScript untuk membuat dropdown berfungsi seperti pada Bootstrap
+document.addEventListener("DOMContentLoaded", function() {
+// Mendapatkan semua elemen dropdown
+var dropdowns = document.querySelectorAll(".dropdown-toggle");
+
+// Iterasi melalui setiap elemen dropdown
+dropdowns.forEach(function(dropdown) {
+    // Menambahkan event listener pada setiap elemen dropdown
+    dropdown.addEventListener("click", function() {
+        // Mengambil dropdown menu terkait
+        var dropdownMenu = dropdown.nextElementSibling;
+
+        // Memeriksa apakah dropdown menu sedang ditampilkan atau tidak
+        var isDisplayed = dropdownMenu.style.display === "block";
+
+        // Menampilkan atau menyembunyikan dropdown menu
+        if (isDisplayed) {
+            dropdownMenu.style.display = "none";
+        } else {
+            dropdownMenu.style.display = "block";
+        }
+    });
+});
+});
+
+</script>

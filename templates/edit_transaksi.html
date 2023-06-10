@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit Transaksi</title>
+    <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+</head>
+<body>
+    <div class="animateme">
+        <ul class="bg-bubbles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      
+     
+      {% if not_available %}
+                        <div class="alert alert-danger mt-2" role="alert">
+                        Maaf Mobil tidak tersedia pada rentang waktu yang Anda pilih.
+                        </div>
+                        {% endif %}
+                        
+
+  <div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <h1 class="fw-bolder:center">Edit Transaksi</h1>
+            <form action="/transaksi/{{id}}/save" method="post" enctype="multipart/form-data">
+           
+                <div class="form-group">
+                    <label for="">nama</label>
+                    <input type="text" name="nama" id="nama" class="form-control" value="{{obj.nama}}">
+                </div>
+                <div class="form-group">
+                    <label for="">Tanggal Transaksi</label>
+                    <input type="date" name="tanggal_transaksi" id="tanggal_transaksi" class="form-control" value="{{obj.tanggal_transaksi}}">
+                </div>
+                <div class="form-group">
+                    <label for="">Tanggal Kembali</label>
+                    <input type="date" name="tgl_kembali" id="tgl_kembali" class="form-control" value="{{obj.tgl_kembali}}">
+                </div>
+                <div class="form-group">
+                    <label for="">Jumlah Hari</label>
+                    <input type="number" name="jumlah_hari" id="jumlah_hari" class="form-control" value="{{obj.jumlah_hari}}">
+                </div>
+                <div class="form-group">
+                    <label for="metode_pembayaran">Metode Pembayaran</label>
+                    <input name="metode_pembayaran" id="metode_pembayaran" class="form-control" value="{{obj.metode_pembayaran}}">
+                       
+                </div>
+                
+                <div class="form-group">
+                    <label for="">Harga Sewa</label>
+                    <input type="number" name="harga_sewa" id="harga_sewa" class="form-control" value="{{obj.harga_sewa}}">
+                </div>
+                <div class="form-group">
+                    <label for="">Denda Per Hari</label>
+                    <input type="number" name="denda_per_hari" id="denda_per_hari" class="form-control" value="{{obj.denda_per_hari}}">
+                </div>
+                <div class="form-group">
+                    <label for="">Total Biaya</label>
+                    <input type="number" name="total_biaya" id="total_biaya" class="form-control" value="{{obj.total_biaya}}">
+                </div>
+                <div class="form-group">
+                    <label for="">Denda</label>
+                    <input type="number" name="denda" id="denda" class="form-control" value="{{obj.denda}}">
+                </div>
+                   
+                    <div class="form-group">
+                        <a href="/pemesanan/{{id}}/transaksi" class="btn btn-warning">cancel</a>
+                        <button class="btn btn-primary" >Submit</button>
+
+                    </div>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    
+    <script src="{{url_for('static', filename='bootstrap.min.js')}}" rel="stylesheet"></script>
+</style>
+<style>
+body {
+  
+    background-size: cover;
+    background-position: center;
+    color: #black;
+    font-family: 'Poppins', sans-serif;
+}
+h1 {
+    color: #f5f5f5;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding: 10px 63px;
+    background-color: #1E90FF;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .form-group {
+    margin-bottom: 15px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+label {
+    font-weight: bold;
+}
+input[type="text"], input[type="number"], input[type="date"] {
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
+    outline: none;
+}
+.btn {
+    background-color: #1E90FF;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: #007bff;
+}
+.btn-warning {
+    background-color: #ffc107;
+    color: #000;
+}
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}
+</style>
+<script>
+    
+  function login() {
+    // validation code here
+    // redirect to login page if validation passes
+    window.location.href = "/login/save";
+  }
+  
+  // bubbles animation
+  let bubbles = document.querySelectorAll(".bg-bubbles");
+  let bubbleCount = 12;
+  
+  for (let i = 0; i < bubbleCount; i++) {
+    let bubble = document.createElement("li");
+    let size = Math.floor(Math.random() * 60 + 40);
+    let duration = Math.floor(Math.random() * 10 + 6);
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+    bubble.style.animationDuration = duration + "s";
+    bubbles[0].appendChild(bubble);
+  }
+  
+</script>
+{% if pesan %}
+        <p>{{ pesan }}</p>
+    {% endif %}
+
+</body>
+</html>

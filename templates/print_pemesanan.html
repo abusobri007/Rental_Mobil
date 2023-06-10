@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/img/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+
+</head>
+<body>
+    <button id="download-pdf" class="btn btn-primary">Unduh PDF</button>
+
+   
+    <title>Data Pemesanan</title>
+    <style>
+       
+            body {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 12pt;
+                line-height: 1.5;
+                margin: 0;
+                padding: 0;
+                background-color: #f2f2f2;
+            }
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 30px;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            }
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 30px;
+            }
+            .header img {
+                height: 60px;
+            }
+            .title {
+                font-family: 'Roboto Slab', serif;
+                font-size: 24pt;
+                font-weight: bold;
+                text-align: center;
+                margin: 0;
+                text-transform: uppercase;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-bottom: 30px;
+            }
+            th, td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+            th {
+                background-color: #f2f2f2;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+            .total {
+                font-weight: bold;
+            }
+            .action {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+    </style>
+</head>
+<body>
+    <h1>Data Pemesanan</h1>
+    <table>
+        <tr>
+            <th>Deskripsi</th>
+            <th>Nilai</th>
+        </tr>
+        <tr>
+            <td>ID Pemesanan</td>
+            <td>{{ invoice_data.id }}</td>
+        </tr>
+        <tr>
+            <td>Nama Pelanggan</td>
+            <td>{{ invoice_data.nama }}</td>
+        </tr>
+        <tr>
+            <td>Merek Mobil</td>
+            <td>{{ invoice_data.merek }}</td>
+        </tr>
+        <tr>
+            <td>Denda per Hari</td>
+            <td>Rp{{ invoice_data.denda_per_hari }}</td>
+        </tr>
+        <tr>
+            <td>Jumlah Hari</td>
+            <td>{{ invoice_data.jumlah_hari }}</td>
+        </tr>
+        <tr>
+            <td>Tanggal Sewa</td>
+            <td>{{ invoice_data.tgl_sewa }}</td>
+        </tr>
+        <tr>
+            <td>Tanggal Kembali</td>
+            <td>{{ invoice_data.tgl_kembali }}</td>
+        </tr>
+        <tr class="total">
+            <td>Total Biaya</td>
+            <td>Rp{{ invoice_data.total_biaya }}</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>{{ invoice_data.status }}</td>
+        </tr>
+    </table>
+    <script>
+        const button = document.getElementById('download-pdf');
+        button.addEventListener('click', () => {
+            const invoiceTable = document.querySelector('table');
+            const invoice = window.open('', 'Invoice');
+            invoice.document.write('<html><head><title>Data Pemesanan</title></head><body>');
+            invoice.document.write('<h1>Data Pemesanan</h1>');
+            invoice.document.write(invoiceTable.outerHTML);
+            invoice.document.write('</body></html>');
+            invoice.document.close();
+            invoice.print();
+            });
+                // tambahan style agar lebih menarik saat di download
+                const style = `
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        font-size: 12pt;
+                        line-height: 1.5;
+                    }
+                    h1 {
+                        font-size: 16pt;
+                        font-weight: bold;
+                        text-align: center;
+                        margin-top: 0;
+                        margin-bottom: 30pt;
+                    }
+                    table {
+                        border-collapse: collapse;
+                        width: 100%;
+                    }
+                    th, td {
+                        padding: 8px;
+                        text-align: left;
+                        border-bottom: 1px solid #ddd;
+                    }
+                    th {
+                        background-color: #f2f2f2;
+                    }
+                    .total {
+                        font-weight: bold;
+                    }
+                </style>
+            `;
+            invoice.document.head.insertAdjacentHTML('beforeend', style);
+            
+</script>
+
+
+</body>
+</html>

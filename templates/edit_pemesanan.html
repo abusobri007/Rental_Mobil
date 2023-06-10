@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add pemesanan</title>
+    <link href="{{url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   
+    
+</head>
+</head>
+<body>
+   
+      
+     
+           
+<body>
+    <div class="container">
+      <h1 class="fw-bolder">Update Transaksi</h1>
+      <form action="/editkuy/{{id}}/save" method="post" enctype="multipart/form-data">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="nama">Nama</label>
+              <input type="text" name="nama" id="nama" class="form-control" value="{{obj.nama}}">
+            </div>
+            <div class="form-group">
+              <label for="merek">Merek</label>
+              <input type="text" name="merek" id="merek" class="form-control" value="{{ obj.merek }}">
+            </div>
+            <div class="form-group">
+              <label for="nomor_plat">No Plat</label>
+              <input type="text" name="nomor_plat" id="nomor_plat" class="form-control" value="{{obj.nomor_plat}}">
+            </div>
+            <div class="form-group">
+              <label for="denda_per_hari">Denda Per Hari</label>
+              <input type="number" name="denda_per_hari" id="denda_per_hari" class="form-control" value="{{obj.denda_per_hari}}">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="harga_sewa">Harga Sewa</label>
+              <input type="number" name="harga_sewa" id="harga_sewa" class="form-control" value="{{obj.harga_sewa}}">
+            </div>
+            <div class="form-group">
+              <label for="tgl_sewa">Tanggal Sewa</label>
+              <input type="date" name="tgl_sewa" id="tgl_sewa" class="form-control" value=  >
+            </div>
+            <div class="form-group">
+              <label for="tgl_kembali">Tanggal kembali</label>
+              <input type="date" name="tgl_kembali" id="tgl_kembali" class="form-control" value=>
+            </div>
+            <div class="form-group"  >
+                <label for="">Jumlah Hari</label>
+                <input type="number" name="jumlah_hari" id="jumlah_hari" class="form-control" value="{{obj.jumlah_hari}}">
+            </div>
+            <div class="form-group">
+                <label for="dp">DP</label>
+                <input name="dp" id="dp" class="form-control"  value="{{obj.dp}}">
+            </div>
+            <div class="form-group" >
+                <label for="" >Total Biaya</label>
+                <input type="number" name="total_biaya" id="total_biaya" class="form-control" value="{{obj.total_biaya}}">
+            </div>
+            <div class="form-group" >
+                <label for="" style="color: white;">Sisa Harga</label>
+                <input type="number" name="sisa_harga" id="sisa_harga" class="form-control"  value="{{obj.sisa_harga}}">
+            </div>
+              <div class="form-group" >
+                  <label for="" >Status</label>
+                  <input type="text" name="status" id="status" class="form-control"  value="{{obj.status}}">
+              </div>
+              <div class="form-group" >
+                <label for="">Status_mobil</label>
+                <input type="text" name="status_mobil" id="status_mobil" class="form-control"  value="{{obj.status_mobil}}">
+            </div>
+            <div class="form-group">
+              <a href="#" id="cancel-link" class="btn btn-warning">Cancel</a>
+              <button class="btn btn-primary" onclick="submitNotif()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+                
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                
+                
+                
+                
+                
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+    </div>
+    
+    <script src="{{url_for('static', filename='bootstrap.min.js')}}" rel="stylesheet"></script>
+ 
+    
+</style>
+<style>
+    h1 {
+        color: #f5f5f5;
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        padding: 10px 63px;
+        background-color: #1E90FF;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        display: block;
+        margin: 0 auto;
+        cursor: pointer;
+     }
+     .container {
+        border: 1px solid #ccc;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 5px;
+        max-width: 700px;
+      }
+.red-date {
+    background-color: red !important;
+    color: white;
+}
+
+  
+  .fw-bolder {
+    font-weight: bold;
+    text-align: center;
+  }
+.blue-calendar .ui-datepicker-header {
+    background-color: blue;
+    color: white;
+  }
+  .blue-calendar .ui-state-default {
+    background-color: white;
+  }
+  .red-date .ui-state-default {
+    background-color: red !important;
+    color: white;
+    cursor: default;
+  }     
+body {
+    background-image: url('');
+    background-size: cover;
+    background-position: center;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+}
+.unavailable-date {
+    background-color: red;
+   
+}
+.flatpickr-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  .flatpickr-day.red-date {
+    background-color: red;
+    color: white;
+  }
+  
+.red-date {
+    color: red;
+  }
+h1 {
+    color: #f5f5f5;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding: 10px 95px;
+    background-color: #1E90FF;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .form-group {
+    margin-bottom: 15px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+label {
+    font-weight: bold;
+}
+input[type="text"], input[type="number"], input[type="date"] {
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
+    outline: none;
+}
+.btn {
+    background-color: #1E90FF;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: #007bff;
+}
+.btn-warning {
+    background-color: #ffc107;
+    color: #000;
+}
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}
+
+.red-date .flatpickr-day[data-date]:not(.flatpickr-disabled) {
+    background-color: red !important;
+    color: white;
+  }
+  
+  
+  
+</style>
+{% if pesan %}
+        <p>{{ pesan }}</p>
+    {% endif %}
+
+</body>
+</html>
