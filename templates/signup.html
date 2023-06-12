@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+
         .wrapper {
             display: grid;
             grid-template-columns: 1fr;
@@ -32,14 +33,15 @@
             margin-top: 40px;
         }
         .password-toggle-icon {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-          }
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          cursor: pointer;
+        }
+
     </style>
-    <title>Login</title>
+    <title>signup</title>
 </head>
 
 <body>
@@ -57,42 +59,61 @@
             <img src="https://ouch-cdn2.icons8.com/u3eILqZYLrs0xuz2jqe2kTUT8_nIiNw748fxR3BIjhk/rs:fit:256:372/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvNTYz/L2MzNWYyZmNlLTQ4/ZTQtNDBlYi1iNzIz/LTZiMjBmZGU4YzFk/OS5wbmc.png" alt="">
         </div>
         <div class="form-wrapper sign in">
-            <form action="/login/save" method="POST">
-                <h2>Login</h2>
-                <div class="input-group">
-                    <label for="username"></label>
-                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                </div>
-                <div class="input-group">
-                    <label for="password"></label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                    <i class="password-toggle-icon far fa-eye"></i>
-                </div>
-            
-                <div class="signUp-link">
-                    <p>belum punya akun ? <a href="/signup" class="signUpBtn-link">Sign up</a></p>
-                </div>
-                <button type="submit">Login</button>
-            </form>
+          <form action="/signup/save" method="POST">
+            <h2>Signup</h2>
+            <div class="input-group">
+              <label for="email"></label>
+              <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+              <label for="username"></label>
+              <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="input-group">
+              <label for="password"></label>
+              <input type="password" id="password" name="password" placeholder="Enter your password" required>
+              <i class="password-toggle-icon far fa-eye"></i>
+            </div>
+            <div class="input-group">
+              <label for="confirm_password"></label>
+              <input type="password" id="confirm_password" name="confirm_password" placeholder="Enter your confirm_password" required>
+              <i class="password-toggle-icon far fa-eye"></i>
+            </div> 
+            <div class="signUp-link">
+              <p>sudah punya akun? <a href="/login/" class="signUpBtn-link">login</a></p>
+            </div>
+            <button type="submit">SIG IN</button>
+          </form>
         </div>
+        
+        <script>
+          var passwordInput = document.getElementById("password");
+          var passwordToggleIcon = document.querySelector(".password-toggle-icon");
+          var confirmInput = document.getElementById("confirm_password");
+          var confirmToggleIcon = document.querySelectorAll(".password-toggle-icon")[1];
+      
+          passwordToggleIcon.addEventListener("click", function() {
+            togglePasswordVisibility(passwordInput, passwordToggleIcon);
+          });
+      
+          confirmToggleIcon.addEventListener("click", function() {
+            togglePasswordVisibility(confirmInput, confirmToggleIcon);
+          });
+      
+          function togglePasswordVisibility(inputElement, toggleIcon) {
+            if (inputElement.type === "password") {
+              inputElement.type = "text";
+              toggleIcon.classList.remove("fa-eye");
+              toggleIcon.classList.add("fa-eye-slash");
+            } else {
+              inputElement.type = "password";
+              toggleIcon.classList.remove("fa-eye-slash");
+              toggleIcon.classList.add("fa-eye");
+            }
+          }
+        </script>
+        
     </div>
-    
-  <script>
-    var passwordInput = document.getElementById("password");
-    var passwordToggleIcon = document.querySelector(".password-toggle-icon");
-
-    passwordToggleIcon.addEventListener("click", function() {
-      if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        passwordToggleIcon.classList.remove("fa-eye");
-        passwordToggleIcon.classList.add("fa-eye-slash");
-      } else {
-        passwordInput.type = "password";
-        passwordToggleIcon.classList.remove("fa-eye-slash");
-        passwordToggleIcon.classList.add("fa-eye");
-      }
-    });
-  </script>
 </body>
 </html>
 
@@ -121,8 +142,8 @@
     }
     .wrapper {
         position: relative;
-        width: 400px;
-        height: 500px;
+        width: 600px;
+        height: 600px;
         background: white;
         box-shadow: 0 0 50px #1E90FF;
         border-radius: 20px;
