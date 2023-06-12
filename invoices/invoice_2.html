@@ -65,25 +65,27 @@
             <th>Status</th>
             <th>Status Mobil</th>
             <th>Tanggal</th>
-          
+            <th>Nomor Polisi</th>
+            <th>Merk</th>
         </tr>
         <tr>
-            <td>{{ data.id }}</td>
-            <td>{{ data.nama }}</td>
-            <td>{{ data.merek }}</td>
-            <td>{{ data.denda_per_hari }}</td>
-            <td>{{ data.jumlah_hari }}</td>
-            <td>{{ data.tgl_sewa }}</td>
-            <td>{{ data.tgl_kembali }}</td>
-            <td>{{ data.total_biaya }}</td>
-            <td>{{ data.status }}</td>
-            <td>{{ data.status_mobil }}</td>
-            <td>{{ data.date }}</td>
-          
+            <td>2</td>
+            <td>bang rukin</td>
+            <td>Alphard</td>
+            <td>1000000</td>
+            <td>2</td>
+            <td>2023-06-01 00:00:00</td>
+            <td>2023-06-03 00:00:00</td>
+            <td>2000000</td>
+            <td>belum lunas</td>
+            <td>kembali</td>
+            <td>2023-06-12</td>
+            <td>DR098KB</td>
+            <td>Alphard</td>
         </tr>
     </table>
     
-    <a class="download-button" href="{{ url_for('pemesanan_blueprint.invoice', id=data.id) }}">Download</a>
+    <a class="download-button" href="/invoice/2">Download</a>
 </body>
 </body>
 </html>

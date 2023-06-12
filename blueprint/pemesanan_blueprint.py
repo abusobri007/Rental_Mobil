@@ -87,12 +87,12 @@ ROWS_PER_PAGE = 4
 @pemesanan_blueprint.route('/list_transaksikuy/<int:page>')
 def all_pemesanan(page):
     tr = MobilDisewa.query.all()
-
     for a in tr:
-        if a.sisa_harga != 0 and a.status is not None and not a.status.endswith('belum lunas'):
-            a.status += 'belum lunas'
-            db.session.add(a)
-            db.session.commit()
+     if a.sisa_harga == 0:
+        a.status = 'lunas'
+        db.session.add(a)
+        db.session.commit()
+
 
     status_mobil = request.args.get('status_mobil')
     statusPemesanan = request.args.get('status')
@@ -523,6 +523,8 @@ import pdfkit
 
 from io import BytesIO
 
+from flask import send_file
+
 @pemesanan_blueprint.route('/invoicekuy/<int:id>')
 def invoicekuy(id):
     pemesanan = MobilDisewa.query.filter_by(id=id).first()
@@ -541,8 +543,7 @@ def invoicekuy(id):
         'status': pemesanan.status,
         'status_mobil': pemesanan.status_mobil,
         'date': dateNow,
-        'nomorPolisi': m.nomor_plat,
-        'merk': m.merek
+        
     }
 
     rendered_template = render_template('invoice_template.html', data=invoice_data)
@@ -555,4 +556,5 @@ def invoicekuy(id):
     with open(pdf_file_path, 'wb') as file:
         file.write(pdf_bytes)
 
-    return send_file(pdf_file_path, as_attachment=True)
+    # Mengirimkan file PDF sebagai respons ke halaman cetak PDF di browser
+    return send_file(pdf_file_path, mimetype='application/pdf')

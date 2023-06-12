@@ -406,23 +406,24 @@ input[name="merek_nama"] {
         </button>
         <ul class="dropdown-menu">
           <li>
-            <a class="dropdown-item" href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=1, status_mobil=request.args.get('status_mobil', ''), status='semua') }}">
+            <a class="dropdown-item" href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=request.args.get('page', 1), status_mobil=request.args.get('status_mobil', ''), status='semua') }}">
               Semua
             </a>
           </li>
           <li>
-            <a class="dropdown-item" href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=1, status_mobil=request.args.get('status_mobil', ''), status='lunas') }}">
+            <a class="dropdown-item" href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=request.args.get('page', 1), status_mobil=request.args.get('status_mobil', ''), status='lunas') }}">
               Lunas
             </a>
           </li>
           <li>
-            <a class="dropdown-item" href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=1, status_mobil=request.args.get('status_mobil', ''), status='belum lunas') }}">
+            <a class="dropdown-item" href="{{ url_for('pemesanan_blueprint.all_pemesanan', page=request.args.get('page', 1), status_mobil=request.args.get('status_mobil', ''), status='belum lunas') }}">
               Belum Lunas
             </a>
           </li>
         </ul>
       </div>
     </div>
+    
     <div class="col-3">
       <div class="filter">
         <form method="GET" action="{{ url_for('pemesanan_blueprint.all_pemesanan', page=mdp.page) }}" class="d-flex">
