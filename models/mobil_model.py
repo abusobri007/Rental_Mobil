@@ -8,9 +8,10 @@ from flask_login import LoginManager , UserMixin
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
+    email = db.Column(db.String(100))
     username = db.Column(db.String(100))
     password = db.Column(db.String(100))
-
+    confirm_password  = db.Column(db.String(100))
     def __repr__(self) -> str:
         return f'{self.username}>'
 

@@ -25,6 +25,10 @@ login_blueprint = Blueprint("login_blueprint", __name__)
 @login_blueprint.route("/login/", methods=["GET"])
 def login():
     return render_template("login2.html")
+@login_blueprint.route("/loginkuy/", methods=["GET"])
+def loginkuy():
+    return render_template("loginkuy.html")
+
 
 @login_blueprint.route('/login/save', methods=['POST'])
 def login_post():
@@ -41,6 +45,44 @@ def login_post():
 def logout():
     logout_user()
     return redirect(f'/login/')
+
+@login_blueprint.route('/signup')
+def signup_menu():
+    return render_template('signup.html')
+
+
+@login_blueprint.route('/signup/save', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        # Ambil data dari form
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+
+        # Validasi data
+        if password != confirm_password:
+            flash('Password tidak cocok')
+            return redirect('/signup')
+        elif User.query.filter_by(username=username).first():
+            flash('Username sudah digunakan')
+            return redirect('/signup')
+        elif User.query.filter_by(email=email).first():
+            flash('Email sudah digunakan')
+            return redirect('/signup')
+        else:
+            # Hash password
+            hashed_password = generate_password_hash(password)
+
+            # Simpan data ke database
+            new_user = User(username=username, email=email, password=hashed_password)
+            db.session.add(new_user)
+            db.session.commit()
+
+            flash('Akun berhasil dibuat')
+            return redirect(f'/sewa')
+    return render_template('signup.html')
+
 
 app.register_blueprint(login_blueprint)
 
